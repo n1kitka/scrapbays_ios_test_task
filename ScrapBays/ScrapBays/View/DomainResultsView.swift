@@ -16,15 +16,20 @@ struct DomainResultsView: View {
         } else {
             ScrollView {
                 ForEach(viewModel.results) { domain in
-                    NavigationLink(destination: DomainPurchaseView()) {
-                        Text(domain.domain)
-                            .font(.headline)
-                            .foregroundColor(.black)
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .padding(.vertical, 24)
-                            .padding(.horizontal)
-                            .background(Color.white)
-                            .cornerRadius(20)
+                    NavigationLink(destination: DomainPurchaseView(domain: domain)) {
+                        VStack(alignment: .leading, spacing: 10) {
+                            Text(domain.domain)
+                                .font(.headline)
+                                .foregroundColor(.black)
+                            
+                            Text(domain.isAvailable ? "Available" : "Unavailable")
+                                .font(.subheadline)
+                                .foregroundColor(domain.isAvailable ? .green : .red)
+                        }
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding()
+                        .background(Color.white)
+                        .cornerRadius(20)
                     }
                 }
                 .padding()

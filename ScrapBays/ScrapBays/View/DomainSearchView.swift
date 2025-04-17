@@ -22,7 +22,21 @@ struct DomainSearchView: View {
                         .textFieldStyle(PlainTextFieldStyle())
                         .font(.system(size: 28, weight: .medium))
                     
-                    DomainResultsView(viewModel: viewModel)
+                    if viewModel.isLoading {
+                        ProgressView()
+                            .padding()
+                    } else if let errorMessage = viewModel.errorMessage {
+                        Text(errorMessage)
+                            .foregroundColor(.red)
+                            .multilineTextAlignment(.center)
+                            .padding()
+                    } else if viewModel.results.isEmpty && viewModel.query.count >= 3 {
+                        Text("No domains found.")
+                            .foregroundColor(.gray)
+                            .padding()
+                    } else {
+                        DomainResultsView(viewModel: viewModel)
+                    }
                 }
                 .padding(.horizontal)
             }
