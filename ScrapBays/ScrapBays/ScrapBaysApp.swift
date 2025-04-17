@@ -11,7 +11,7 @@ import SwiftUI
 struct ScrapBaysApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            DomainSearchView()
         }
     }
 }
